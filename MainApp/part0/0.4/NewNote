@@ -1,0 +1,28 @@
+Title Add Note
+User->Browser: Enters text in the input and clicks submit button
+Browser->Server: Sends a post to server
+Note Over Server: 
+    Server gets the inputed data and adds it to an array of Notes
+End Note
+Server-->Browser: Responds with a 302 (redirect)
+Browser->Server: Sends another post to the URL (reload page)
+Server-->Browser: Sends HTML
+
+Note Over Browser:
+    Browser reads html and finds it has to load two files
+    main.css
+    main.js
+End Note
+
+Browser->Server: Get main.css 
+Server-->Browser: Sends main.css
+Browser->Server: Get main.js
+Server-->Browser: Sends main.js
+
+
+Note Over Browser:
+read javascript and gets data in JSON format
+(Array of Notes which now includes the last user's input.)
+Now the browser renders the data
+End Note
+
