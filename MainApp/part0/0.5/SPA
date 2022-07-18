@@ -1,0 +1,21 @@
+Title Add Note
+User->Browser: Enters URL
+Browser->Server: Sends a Get to the Server
+Server-->Browser: Sends HTML
+Note Over Browser:
+    Browser reads html and finds it has to load two files
+    main.css
+    main.js
+End Note
+Browser->Server: Get main.css 
+Server-->Browser: Sends main.css
+Browser->Server: Get main.js
+Server-->Browser: Sends main.js
+Note Over Browser:
+read javascript and gets data in JSON format
+End Note
+
+Note Over Browser:
+Renders the page with the fetched data
+End Note
+

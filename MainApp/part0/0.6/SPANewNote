@@ -1,0 +1,21 @@
+Title Add Note
+User->Browser: Enters text in the input and clicks submit button
+Browser->Server: Sends a post to server
+Note Over Server: 
+    Server gets the inputed data and adds it to an array of Notes
+End Note
+Server-->Browser: Responds with a 201 status (created)
+
+Note Over Browser:
+    Uses the JavaScript code it fetched from the server (JSC).
+    JSC code uses an event handler on the form submit event, to handle the event on a diferent way
+    JSC prevents default behavior of the form submit event (i guess
+    to avoid reloading the page?)
+    JSC adds the new inputed data to the grid
+    JSC sends a post to the server with the new data
+End Note
+
+
+Note Over Server:
+    Gets the data posted from the browsers and process accordingly (Add, Delete, Modify...)
+End Note
