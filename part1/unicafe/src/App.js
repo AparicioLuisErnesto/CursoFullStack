@@ -18,7 +18,9 @@ const Statistics = (props) => {
       <div>
         <h1>Statistics</h1>
         <table>
-          {renderStatistics}
+          <tbody>
+            {renderStatistics}
+          </tbody>
         </table>
       </div>
     )
