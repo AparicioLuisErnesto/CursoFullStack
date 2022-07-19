@@ -4,14 +4,17 @@ const Header = (props) => (
   </div>
 )
 
-const Content = (props) => (
-  <div>
-    <Part courseName={props.course1} courseNumberOfExercises={props.exercises1} />
-    <Part courseName={props.course2} courseNumberOfExercises={props.exercises2} />
-    <Part courseName={props.course3} courseNumberOfExercises={props.exercises3} />
-  </div>
-)
-
+const Content = (props) => {
+  let partsComponent = []
+  props.parts.forEach(part => {
+      partsComponent.push(<Part key = {part.name} courseName={part.name} courseNumberOfExercises={part.exercises}/>)
+  })
+  return (
+    <div>
+      {partsComponent}
+    </div>
+  )
+}
 const Part = (props) => {
   return (
     <div>
@@ -30,20 +33,28 @@ const Total = (props) => (
 
 const App = () => {
   const course = 'Half Stack application development'
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
+  const part1 = {
+    name: 'Fundamentals of React',
+    exercises: 10
+  }
+  const part2 = {
+    name: 'Using props to pass data',
+    exercises: 7
+  }
+  const part3 = {
+    name: 'State of a component',
+    exercises: 14
+  }
 
+  const parts = [part1, part2, part3]
   return (
     <div>
       <Header course={course} />
-      <Content course1={part1} exercises1={exercises1} course2={part2} exercises2={exercises2} course3={part3} exercises3={exercises3}/>
-      <Total numberOfExercises={exercises1 + exercises2 + exercises3} />
+      <Content parts={parts} />
+      <Total numberOfExercises={part1.exercises + part2.exercises + part3.exercises}/>
     </div>
   )
 }
+
 
 export default App
