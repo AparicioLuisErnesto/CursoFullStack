@@ -16,7 +16,10 @@ const MostVotedAnecdote = (props) => {
     }
   })
   return (
+    <div>
     <p>{mostVotedAnecdote}</p>
+    <p>has {votes} votes</p>
+    </div>
   )
 }
 
@@ -53,7 +56,6 @@ const App = () => {
   ]
   const [selected, setSelected] = useState(0)
   const [anecdote, setAnecdote] = useState(anecdotes)
-  let anecdoteMostVoted = anecdotes[selected].anecdote
 
   let index = 0;
 
