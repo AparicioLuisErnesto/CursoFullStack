@@ -1,95 +1,87 @@
 import { useState } from 'react'
 
-
 const Button = (props) => {
-  const clickHandler = props.clickHandler
   return (
-    <button onClick={clickHandler}>{props.buttonText}</button>
+    <button onClick={props.buttonHandler}>{props.buttonName}</button>
   )
 }
 
-const Statistics = (props) => {
-  const renderStatistics = []
-  props.statistics.forEach((statistic) => {
-    renderStatistics.push(<Statistic key={statistic.name} name={statistic.name} value={statistic.value} />);
+const MostVotedAnecdote = (props) => {
+  let votes = -1;
+  let mostVotedAnecdote
+  props.anecdotes.forEach(anecdote => {
+    if (anecdote.votes > votes) {
+      votes = anecdote.votes
+      mostVotedAnecdote = anecdote.anecdote
+    }
   })
-  if (props.clicks > 0) {
-    return (
-      <div>
-        <h1>Statistics</h1>
-        <table>
-          <tbody>
-            {renderStatistics}
-          </tbody>
-        </table>
-      </div>
-    )
-  }
   return (
-    <div>
-      <h1>Statistics</h1>
-      <p>No feedback givenS</p>
-    </div>
+    <p>{mostVotedAnecdote}</p>
   )
 }
-
-const Statistic = (props) => (
-  <tr><td>{props.name}</td><td>{props.value}</td></tr>
-)
 
 const App = () => {
-  // save clicks of each button to its own state
-  const [good, setGood] = useState(0)
-  const [neutral, setNeutral] = useState(0)
-  const [bad, setBad] = useState(0)
-
-  const buttonGoodFeedback = () => {
-    setGood(good + 1)
-  }
-  const buttonNeutralFeedback = () => {
-    setNeutral(neutral + 1)
-  }
-  const buttonBadFeedback = () => {
-    setBad(bad + 1)
-  }
-  const all = good + neutral + bad
-  const average = (good > 0 || bad > 0) ? (good - bad) / all : 0
-  const positive = good > 0 ? good * 100 / all + "%" : (0)
-  const statistics = [
+  const anecdotes = [
     {
-      name: "Good",
-      value: good
+      anecdote: 'If it hurts, do it more often.',
+      votes: 0
     },
     {
-      name: "Neutral",
-      value: neutral
+      anecdote: 'Adding manpower to a late software project makes it later!',
+      votes: 0
     },
     {
-      name: "Bad",
-      value: bad
+      anecdote: 'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+      votes: 0
     },
     {
-      name: "All",
-      value: all
+      anecdote: 'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+      votes: 0
     },
     {
-      name: "Average",
-      value: average
+      anecdote: 'Premature optimization is the root of all evil.',
+      votes: 0
     },
     {
-      name: "Positive",
-      value: positive
+      anecdote: 'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
+      votes: 0
+    },
+    {
+      anecdote: 'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
+      votes: 0
     }
-
   ]
+  const [selected, setSelected] = useState(0)
+  const [anecdote, setAnecdote] = useState(anecdotes)
+  let anecdoteMostVoted = anecdotes[selected].anecdote
+
+  let index = 0;
+
+  const getRandomAnecdote = () => {
+    index = Math.floor(Math.random() * anecdotes.length)
+    setSelected(index)
+  }
+
+  const voteAnecdote = () => {
+    const newAnecdotes = anecdote.map((anecdote, item) => {
+      if (item == selected) {
+        return { ...anecdote, votes: anecdote.votes + 1 }
+      }
+      return { ...anecdote }
+    })
+    setAnecdote(newAnecdotes)
+  }
 
   return (
     <div>
-      <h1>give feedback</h1>
-      <Button clickHandler={buttonGoodFeedback} buttonText="Good"></Button>
-      <Button clickHandler={buttonNeutralFeedback} buttonText="Neutral"></Button>
-      <Button clickHandler={buttonBadFeedback} buttonText="Bad"></Button>
-      <Statistics statistics={statistics} clicks={all} />
+      <h1>Anecdote of the day</h1>
+      <p>{anecdote[selected].anecdote}</p>
+      <p>has {anecdote[selected].votes} votes</p>
+      <br></br>
+      <Button buttonHandler={voteAnecdote} buttonName="vote" />
+      <Button buttonHandler={getRandomAnecdote} buttonName="next anecdote" />
+      <h1>Anecdote with most votes</h1>
+      <MostVotedAnecdote anecdotes={anecdote}/>
     </div>
   )
 }
