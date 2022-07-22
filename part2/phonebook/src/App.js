@@ -4,8 +4,7 @@ import axios from 'axios'
 const Filters = (props) => {
   return (
     <div>
-      <p>filter shown with</p>
-      <input value={props.searchKeyWord} onChange={props.handler} />
+      filter shown with <input value={props.searchKeyWord} onChange={props.handler} />
     </div>
   )
 }
