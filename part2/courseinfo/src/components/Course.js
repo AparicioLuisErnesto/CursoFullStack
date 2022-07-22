@@ -4,8 +4,7 @@ const Course = (props) => {
 
     const htmlForCourses = props.course.map(course => {
         const htmlForParts = course.parts.map(courseParts => {
-            const debug = <p key={"coursePart" + course.id + courseParts.id}> {courseParts.name} {courseParts.exercises} </p>
-            return debug
+            return <p key={"coursePart" + course.id + courseParts.id}> {courseParts.name} {courseParts.exercises} </p>
         })
         const amountOfExercises = course.parts.reduce((sumOfExercises, part) => {
             return sumOfExercises += part.exercises
