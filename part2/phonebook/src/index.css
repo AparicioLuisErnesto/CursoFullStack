@@ -1,0 +1,15 @@
+.notificationOk {
+    max-width: 400px;
+    background-color: rgba(42, 128, 16, 0.973);
+    color: rgb(255, 255, 255);
+    margin: 15px auto;
+    text-align: center;
+}
+
+.notificationError {
+    max-width: 400px;
+    background-color: rgba(128, 16, 16, 0.973);
+    color: rgb(255, 255, 255);
+    margin: 15px auto;
+    text-align: center;
+}

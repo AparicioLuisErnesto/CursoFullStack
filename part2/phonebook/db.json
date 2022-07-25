@@ -1,18 +1,13 @@
 {
   "persons": [
     {
-      "name": "Perez Javier",
-      "number": "155 060248",
-      "id": 1
-    },
-    {
-      "name": "Luis Aparicio",
-      "number": "155 060481123",
+      "name": "Manuel Dominguez",
+      "number": "1515616516",
       "id": 2
     },
     {
-      "name": "Javier pErez",
-      "number": "Lozanto",
+      "name": "Javier Domingz",
+      "number": "158156132",
       "id": 3
     }
   ]

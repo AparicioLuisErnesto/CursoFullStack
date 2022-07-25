@@ -1,6 +1,15 @@
 import { useState, useEffect } from 'react'
 import phonebook from './services/phonebook'
 
+const Notification = (props) => {
+  const notificationClassType = 'notification' + props.type
+  return (
+    <div className={notificationClassType}>
+      <p>{props.message}</p>
+    </div>
+  )
+}
+
 const Filters = (props) => {
   return (
     <div>
@@ -52,6 +61,8 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newPhoneNumber, setNewPhoneNumber] = useState('')
   const [searchKeyWord, setSearchKeyWord] = useState('')
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [notificationType, setNotificationType] = useState('Ok')
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -74,8 +85,17 @@ const App = () => {
                   return person
                 }
               }))
+              setNotificationType('Ok')
+              setErrorMessage(`${newName} was updated`)               
               setNewName('')
               setNewPhoneNumber('')
+              setTimeout(() => {
+                setErrorMessage(null)
+              },5000)
+            })
+            .catch(err => {
+              setNotificationType('Error')
+              setErrorMessage('The person no longer exist in the database')
             })
         }
       }
@@ -85,8 +105,13 @@ const App = () => {
         .addData(newData)
         .then(response => {
           setPersons(persons.concat(response))
+          setNotificationType('Ok')          
+          setErrorMessage(`${newName} was added`) 
           setNewName('')
           setNewPhoneNumber('')
+          setTimeout(() => {
+            setErrorMessage(null)
+          },5000)
         })
     }
   }
@@ -112,6 +137,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={errorMessage} type={notificationType}/>
       <Filters searchKeyWord={searchKeyWord} handler={handleInputFilter} />
       <h2>add a new</h2>
       <AddForm handleSubmit={handleSubmit} newName={newName} handleInputName={handleInputName} newPhoneNumber={newPhoneNumber} handleInputPhone={handleInputPhone} />
