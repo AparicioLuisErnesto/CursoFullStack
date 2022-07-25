@@ -1,29 +1,19 @@
 {
-  "persons":[
-    { 
-      "name": "Arto Hellas", 
-      "number": "040-123456",
+  "persons": [
+    {
+      "name": "Perez Javier",
+      "number": "155 060248",
       "id": 1
     },
-    { 
-      "name": "Ada Lovelace", 
-      "number": "39-44-5323523",
+    {
+      "name": "Luis Aparicio",
+      "number": "155 060481123",
       "id": 2
     },
-    { 
-      "name": "Dan Abramov", 
-      "number": "12-43-234345",
+    {
+      "name": "Javier pErez",
+      "number": "Lozanto",
       "id": 3
-    },
-    { 
-      "name": "Mary Poppendieck", 
-      "number": "39-23-6423122",
-      "id": 4
-    },
-    { 
-      "name": "Javier Perez", 
-      "number": "39-23-6422422",
-      "id": 5
-    }    
+    }
   ]
 }
